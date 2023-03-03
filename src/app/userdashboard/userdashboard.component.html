@@ -1,0 +1,191 @@
+<app-header1></app-header1>
+
+
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container-fluid">
+      <a class="navbar-brand text-bold" href="#">
+          <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="50" alt="logo">
+          <span class="text-uppercase">Profile</span>
+      </a>
+    <div class="navbar-brand text-bold">
+      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayHomeScreen()">🛖</button>
+      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayUserProfile()" >👨🏼‍💼</button>
+      <button class="btn btn-primary btn-lg" >🎓 </button>
+      <button class="btn btn-primary btn-lg" > ✏️</button>
+      <button class="btn btn-primary btn-lg" > ❓<i class="bi bi-power"></i></button>
+      <button class="btn btn-primary btn-lg" ></button>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-5">
+  <div class="card">
+
+    <ng-container *ngIf="homeScreen">
+      <div class="d-flex justify-content-between p-3">
+          <div class="image">
+              <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="90" alt="logo">
+          </div>
+          <div class="quiz-header">
+              <h4 style="font-family: cursive;">Angular & TypeScript Quiz!</h4>
+          </div>
+      </div>
+    </ng-container>
+
+      <ng-container *ngIf="isQuizCompleted">
+        <div class="row d-flex justify-content-between">
+                <div class="result text-center col-md-6 col-sm-12">
+                <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
+                <p>Total Question Attempted :</p>
+                <p>Total Correct Answered : </p>
+                <p>Total Wrong Answered : </p>
+                <p>Your Score : Points </p>
+            </div>
+        </div>
+    </ng-container>
+
+
+
+      <!-- <button class="btn" (click)="enterFullScreen()">Full Screen<button> -->
+
+
+
+  </div>
+
+  <!-- <ng-container *ngIf="displayUserDetails">
+    <form [formGroup]="RegisterForm" (ngSubmit)="OnSubmit()" novalidate>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th scope="row" colspan="3">Details</th>
+        </tr>
+        <tr>
+          <td>
+              <div class="name col-md-12 my-3">
+                <label for="">Full Name </label>
+                <input type="text" name="Name" class="form-control" #Name ngModel required>
+
+                <p *ngIf="Name.touched && Name.invalid" class="error">
+                  <sup>*</sup>Please enter atleast first name
+                </p>
+                <p *ngIf="Name.errors?.['minlength']" class="error">
+                  <sup>*</sup>Name shouldn't be less than 2 words
+                </p>
+
+              </div>
+              <div class="name col-md-12 my-3">
+                <label for="">Email </label>
+                <input type="email" name="Email" class="form-control" #Email ngModel required>
+
+                  <p *ngIf="Email.touched && Email.invalid" class="error">
+                    <sup>*</sup>Please provide email
+                  </p>
+                  <p *ngIf="Email.errors?.['pattern']" class="error">
+                    <sup>*</sup>Please enter correct email
+                  </p>
+
+              </div>
+          </td>
+          <td>
+            <div class="name col-md-12 my-3">
+              <label for="">Date of Birth</label>
+              <input  type="date" name="DOB" class="form-control" #DOB ngModel required>
+            </div>
+            <div class="name col-md-12 my-3">
+              <label for="">Mobile Number</label>
+              <input type="tel" name="MobileNumber" class="form-control" #MobileNumber ngModel required>
+            </div>
+
+
+          </td>
+          <td>
+            <div class="name col-md-12 my-3">
+              <label for="">Password</label>
+              <input type="password" name="Password" class="form-control" #Password ngModel required>
+            </div>
+            <div class="name col-md-12 my-3">
+              <label for="">Confirm Password</label>
+              <input type="password" name="ConfirmPassword" class="form-control" #Password ngModel required>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!RegisterForm.valid"
+            >Register</button>
+  </form>
+  </ng-container> -->
+
+
+
+  <ng-container *ngIf="displayUserDetails">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+
+
+<ng-container *ngIf="displayUserDetails">
+
+<div class="container bg-light py-5">
+  <h1 class="display-5 fw-bold">Welocme to Quiz App</h1>
+  <p class="col-md-8 fs-4">This quiz will contains total 9 questions. Each Question holds 10 Points</p>
+  <h4>Rules:</h4>
+  <ol>
+      <li>Correct Question gives you 10 points</li>
+      <li>Incorrect question gives to -10 points</li>
+      <li>You will have 60 sec to answer each question</li>
+      <li>Refereshing the page will reset the Quiz</li>
+  </ol>
+  <h1 style="font-family: cursive;text-align:center">All the best!!</h1>
+  <div class="name col-md-4 my-3">
+      <label for="">Enter your name:</label>
+      <input #name type="text" class="form-control">
+      <label for="">Enter your name1:</label>
+      <input #name type="text" class="form-control">
+  </div>
+  <div class="name col-md-4 my-3">
+    <label for="">Enter your name:</label>
+    <input #name type="text" class="form-control">
+  </div>
+  <div class="name col-md-4 my-4">
+    <label for="">Enter your name:</label>
+    <input #name type="text" class="form-control">
+  </div>
+  <button class="btn btn-primary btn-lg" routerLink="/question">Start the Quiz!!</button>
+</div>
+
+</ng-container>
+
+
+<app-footer1></app-footer1>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quizapp-707c7": {
+      "hosting": {
+        "quizlet": [
+          "quizapp-707c7"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quizapp-707c7"
+  }
+}
