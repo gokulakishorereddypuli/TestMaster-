@@ -4,16 +4,24 @@
 <nav class="navbar navbar-dark bg-primary">
   <div class="container-fluid">
       <a class="navbar-brand text-bold" href="#">
-          <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="50" alt="logo">
-          <span class="text-uppercase">Profile</span>
+          <img src="https://www.easyinternships.in/images/logo.png" width="150" alt="logo">
+          <!-- <span class="text-uppercase">Easyinternships</span> -->
       </a>
     <div class="navbar-brand text-bold">
-      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayHomeScreen()">🛖</button>
-      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayUserProfile()" >👨🏼‍💼</button>
-      <button class="btn btn-primary btn-lg" >🎓 </button>
-      <button class="btn btn-primary btn-lg" > ✏️</button>
-      <button class="btn btn-primary btn-lg" > ❓<i class="bi bi-power"></i></button>
-      <button class="btn btn-primary btn-lg" ></button>
+      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayHomeScreen()"><i class="fa fa-home"></i>  </button>
+      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayUserProfile()" ><i class="fa fa-user"></i></button>
+      <button class="btn btn-primary btn-lg" ><i class="fa fa-book"></i></button>
+
+      <button class="btn btn-primary btn-lg" > <i class="fa fa-question"></i></button>
+
+      <button class="btn btn-primary btn-lg" ><i class="fa fa-file"></i> </button>
+
+      <button class="btn btn-primary btn-lg" > <i class="fa fa-shield"></i></button>
+      <button class="btn btn-primary btn-lg" ><i class="fa fa-bug"></i></button>
+      <button class="btn btn-primary btn-lg" ><i class="fa fa-folder"></i> </button>
+      <button class="btn btn-primary btn-lg" (click)="auth.logout()" ><i class="fa fa-power-off"></i></button>
+
+
     </div>
   </div>
 </nav>
@@ -28,7 +36,7 @@
               <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="90" alt="logo">
           </div>
           <div class="quiz-header">
-              <h4 style="font-family: cursive;">Angular & TypeScript Quiz!</h4>
+              <h4 style="font-family: cursive;">Angular & TypeScript Quiz! {{ stu_ser.ipAddress }}</h4>
           </div>
       </div>
     </ng-container>

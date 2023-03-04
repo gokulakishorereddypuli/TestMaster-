@@ -47,7 +47,7 @@ export class AuthService {
       })
     }
 
-    logout()
+    public logout()
     {
       this.fireAuth.signOut().then(()=>{
         localStorage.removeItem('token');

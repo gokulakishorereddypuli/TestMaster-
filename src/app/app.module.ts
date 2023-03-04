@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { QuestionComponent } from './question/question.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,11 +31,11 @@ import { Header2Component } from './header2/header2.component';
 
 import { FormsModule } from '@angular/forms';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
     QuestionComponent,
     HeaderComponent,
     ChangeBgDirective,
@@ -44,8 +43,8 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
      Footer1Component,
      Footer2Component,
      Header2Component,
-
-     UserdashboardComponent
+     UserdashboardComponent,
+     HomeComponent
   ],
   imports: [
     BrowserModule,
