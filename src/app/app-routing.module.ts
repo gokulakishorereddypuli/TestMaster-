@@ -10,12 +10,12 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'welcome',pathMatch:"full"},
-  {path:"welcome", component:WelcomeComponent,canActivate:[AuthGuard]},
+  {path:"welcome", component:WelcomeComponent},
   {path:"question", component:QuestionComponent},
   {path:"login",component:LoginComponent},
   {path:"dashboard",component:DashboardComponent,canActivate:[AuthGuard]},
   {path:"register",component:RegisterComponent},
-  {path:"student-dashboard",component:UserdashboardComponent}
+  {path:"student-dashboard",component:UserdashboardComponent,canActivate:[AuthGuard]}
 
 ];
 

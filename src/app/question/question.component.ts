@@ -14,6 +14,10 @@ export class QuestionComponent implements OnInit {
 
   //elem=document.documentElement;
 
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+
+
   public elem:any;
   public name: string = "";
   public isfullscreen:boolean=false;
@@ -27,7 +31,10 @@ export class QuestionComponent implements OnInit {
   progress: string = "0";
   isQuizCompleted : boolean = false;
 
-  constructor(private questionService: QuestionService,@Inject(DOCUMENT) private document: any) { }
+  constructor(
+    private questionService: QuestionService,
+    @Inject(DOCUMENT) private document: any)
+    { }
 
   private ESCAPE_KEYCODE:number=27;
 
@@ -62,6 +69,10 @@ export class QuestionComponent implements OnInit {
     this.name = localStorage.getItem("name")!;
     this.getAllQuestions();
     this.startCounter();
+
+    // this.getScreenWidth = window.innerWidth;
+    // this.getScreenHeight = window.innerHeight;
+
   }
   closeFullScreen() {
     if (this.document.exitFullscreen) {
@@ -78,18 +89,14 @@ export class QuestionComponent implements OnInit {
     }
     this.isfullscreen=false;
   }
+
   getAllQuestions() {
     this.questionService.getQuestionJson()
       .subscribe(res => {
         this.questionList = res;  //res.questions
       })
   }
-  nextQuestion() {
-    //this.currentQuestion++;
-  }
-  previousQuestion() {
-    //this.currentQuestion--;
-  }
+
 
   answer(currentQno: number, option: any)
   {
@@ -108,7 +115,8 @@ export class QuestionComponent implements OnInit {
       }, 1000);
 
 
-    } else {
+    }
+    else {
       setTimeout(() => {
         this.currentQuestion++;
         this.inCorrectAnswer++;
@@ -119,14 +127,24 @@ export class QuestionComponent implements OnInit {
       this.points -= 10;
     }
   }
-  startCounter() {
+
+  startCounter()
+  {
     this.interval$ = interval(1000)
       .subscribe(val => {
         this.counter--;
-        if (this.counter === 0) {
-          this.currentQuestion++;
-          this.counter = 30;
-          this.points -= 10;
+        if (this.counter === 0)
+        {
+          if( this.currentQuestion+1 === this.questionList.length){
+            this.isQuizCompleted = true;
+            this.stopCounter();
+          }
+          else{
+            this.currentQuestion++;
+            this.counter = 30;
+            this.points -= 10;
+          }
+
         }
       });
     setTimeout(() => {
@@ -143,9 +161,9 @@ export class QuestionComponent implements OnInit {
     this.counter = 30;
     this.startCounter();
   }
-  resetQuiz(){
+  // resetQuiz(){
 
-  }
+  // }
   // resetQuiz() {
   //   this.resetCounter();
   //   this.getAllQuestions();
@@ -194,5 +212,36 @@ export class QuestionComponent implements OnInit {
     e.preventDefault();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+
+    // if(this.isfullscreen==true)
+    // {
+    //   this.getScreenWidth = window.innerWidth;
+    //   this.getScreenHeight = window.innerHeight;
+    //   this.isfullscreen=false;
+    //   this.closeFullScreen();
+    //   alert("Please enter into full Screen");
+
+    // }
+
+  }
+  @HostListener('document:fullscreenchange', ['$event'])
+  @HostListener('document:webkitfullscreenchange', ['$event'])
+   @HostListener('document:mozfullscreenchange', ['$event'])
+   @HostListener('document:MSFullscreenChange', ['$event'])
+  fullscreenmodes(){
+        this.chkScreenMode();
+      }
+  chkScreenMode(){
+        if(document.fullscreenElement){
+          //fullscreen
+          this.isfullscreen = true;
+        }else{
+          //not in full screen
+          this.isfullscreen = false;
+          alert("Spoof detected");
+        }
+      }
 
 }

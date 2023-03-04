@@ -21,5 +21,13 @@ export class RegisterComponent {
 
       this.register.registerUser(name,email);
   }
+  SignInWithGoogle()
+  {
+    this.register.googleSignIn();
+  }
+  logout()
+  {
+    this.register.logout();
+  }
 
 }
