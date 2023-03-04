@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { GoogleAuthProvider } from 'firebase/auth';
+import { StudentServiceService } from './student-service.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,23 +18,26 @@ export class AuthService {
     private fireAuth:AngularFireAuth,
     private route:Router,
      private db: AngularFireDatabase,
-     private http : HttpClient)
+     private http : HttpClient,
+     private stu_ser:StudentServiceService
+     )
     {
 
     }
-
-    googleSignIn() {
+    public googleSignUpSignIn()
+    {
       this.fireAuth.signOut().then(()=>{
         localStorage.removeItem('token');
         localStorage.removeItem('isLoggedIn');
       }, err=>{
-        this.route.navigate(['/register']);
+        this.route.navigate(['']);
       })
 
       return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then(res => {
         //alert(res);
         //this.route.navigate(['/welcome']);
         console.log(res);
+        this.stu_ser.registerStudent(res);
         localStorage.setItem('isLoggedIn','true');
         localStorage.setItem('token',JSON.stringify(res.user?.email));
         //localStorage.setItem('token',JSON.stringify(res.user?.uid));
@@ -43,47 +47,51 @@ export class AuthService {
       })
     }
 
-
- // const result = randomString.generate(40);
-
-  registerUser(email:string,password:string)
-  {
-    this.fireAuth.createUserWithEmailAndPassword(email,password).then(()=>{
-      alert("Registration Successful");
-      localStorage.setItem('token','true');
-      this.route.navigate(['/quiz']);
-    },err=>{
-      alert(err.message);
-      this.route.navigate(['/register']);
+    logout()
+    {
+      this.fireAuth.signOut().then(()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('isLoggedIn');
+        this.route.navigate(['']);
+      }, err=>{
+        alert(err.message);
+      })
     }
-    )
-  }
-  loginUser(email:string,password:string)
-  {
-    //alert("sing ok");
-    this.fireAuth.signInWithEmailAndPassword(email,password).then(()=>{
-      const itemRef = this.db.object('users');
-      itemRef.set({email: email,password:password});
-      localStorage.setItem('isLoggedIn','true');
-      localStorage.setItem('token',email);
-      this.route.navigate(['/question'])
 
-    },err=>{
-      alert("Something Went Wrong");
-      this.route.navigate(['/register']);
-    }
-    )
-  }
 
-  logout(){
-    this.fireAuth.signOut().then(()=>{
-      localStorage.removeItem('token');
-      localStorage.removeItem('isLoggedIn');
-      this.route.navigate(['/welcome']);
-    }, err=>{
-      alert(err.message);
-    })
-  }
+
+
+
+  // registerUser(email:string,password:string)
+  // {
+  //   this.fireAuth.createUserWithEmailAndPassword(email,password).then(()=>{
+  //     alert("Registration Successful");
+  //     localStorage.setItem('token','true');
+  //     this.route.navigate(['/quiz']);
+  //   },err=>{
+  //     alert(err.message);
+  //     this.route.navigate(['/register']);
+  //   }
+  //   )
+  // }
+  // loginUser(email:string,password:string)
+  // {
+  //   //alert("sing ok");
+  //   this.fireAuth.signInWithEmailAndPassword(email,password).then(()=>{
+  //     const itemRef = this.db.object('users');
+  //     itemRef.set({email: email,password:password});
+  //     localStorage.setItem('isLoggedIn','true');
+  //     localStorage.setItem('token',email);
+  //     this.route.navigate(['/question'])
+
+  //   },err=>{
+  //     alert("Something Went Wrong");
+  //     this.route.navigate(['/register']);
+  //   }
+  //   )
+  // }
+
+
   // constructor() { }
   // logout():void{
   //   localStorage.setItem('isLoggedIn','false');

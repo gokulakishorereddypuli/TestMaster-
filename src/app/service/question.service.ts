@@ -12,7 +12,7 @@ export class QuestionService {
   //   return this.http.get<any>("assets/questions.json");
   // }
   items: Observable<any[]>;
-  constructor(db: AngularFireDatabase,private http : HttpClient)
+  constructor(private db: AngularFireDatabase,private http : HttpClient)
   {
     this.items = db.list('questions').valueChanges();
     // return this.items;

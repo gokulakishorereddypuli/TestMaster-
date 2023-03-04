@@ -23,8 +23,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { AuthGuard } from './guards/auth.guard';
 import { Header1Component } from './header1/header1.component';
 import { Footer1Component } from './footer1/footer1.component';
@@ -32,7 +31,6 @@ import { Footer2Component } from './footer2/footer2.component';
 import { Header2Component } from './header2/header2.component';
 
 import { FormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 
 @NgModule({
@@ -42,14 +40,11 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
     QuestionComponent,
     HeaderComponent,
     ChangeBgDirective,
-    LoginComponent,
-
-    DashboardComponent,
      Header1Component,
      Footer1Component,
      Footer2Component,
      Header2Component,
-     RegisterComponent,
+
      UserdashboardComponent
   ],
   imports: [
