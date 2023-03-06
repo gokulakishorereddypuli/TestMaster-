@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-dark bg-primary">
   <div class="container-fluid">
-      <a class="navbar-brand text-bold" href="#">
+      <a class="navbar-brand text-bold" href="/">
           <img src="https://www.easyinternships.in/images/logo.png" width="150" alt="logo">
           <!-- <span class="text-uppercase">Easyinternships</span> -->
       </a>
@@ -20,7 +20,6 @@
       <button class="btn btn-primary btn-lg" ><i class="fa fa-bug"></i></button>
       <button class="btn btn-primary btn-lg" ><i class="fa fa-folder"></i> </button>
       <button class="btn btn-primary btn-lg" (click)="auth.logout()" ><i class="fa fa-power-off"></i></button>
-
 
     </div>
   </div>
@@ -132,38 +131,47 @@
 
 
   <ng-container *ngIf="displayUserDetails">
+
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col" colspan="3" style="color: rgb(53, 82, 247);">Student Details</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <th>Email</th>
+          <td>{{ stu_ser.stuEmail }}</td>
+          <td><i class="fa fa-check"></i></td>
+        </tr>
+        <tr >
+          <th>Name</th>
+          <td>{{ stu_ser.stuName }}</td>
+          <td><i class="fa fa-check"></i></td>
         </tr>
         <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <th scope="row">Student ID</th>
+          <td>{{ stu_ser.stuId }}</td>
+          <td><i class="fa fa-check"></i></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th scope="row">Last Login IP Address</th>
+          <td>{{ stu_ser.stuIp }}</td>
+          <td><i class="fa fa-check"></i></td>
         </tr>
+        <!-- <tr>
+          <th colspan="3" style="color:red">Note : For any Correction or Updation  Please contact Admin.</th>
+        </tr> -->
       </tbody>
+
+
     </table>
+    <p colspan="3" style="color:red">Note : For any Correction or Updation  Please contact Admin.</p>
   </ng-container>
 
 
 
-<ng-container *ngIf="displayUserDetails">
+<!-- <ng-container *ngIf="displayUserDetails">
 
 <div class="container bg-light py-5">
   <h1 class="display-5 fw-bold">Welocme to Quiz App</h1>
@@ -193,7 +201,7 @@
   <button class="btn btn-primary btn-lg" routerLink="/question">Start the Quiz!!</button>
 </div>
 
-</ng-container>
+</ng-container> -->
 
 
 <app-footer1></app-footer1>

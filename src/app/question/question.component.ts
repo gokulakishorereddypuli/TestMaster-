@@ -24,6 +24,7 @@ export class QuestionComponent implements OnInit {
   public questionList: any = [];
   public currentQuestion: number = 0;
   public points: number = 0;
+  
   counter = 30;
   correctAnswer: number = 0;
   inCorrectAnswer: number = 0;
@@ -94,6 +95,7 @@ export class QuestionComponent implements OnInit {
     this.questionService.getQuestionJson()
       .subscribe(res => {
         this.questionList = res;  //res.questions
+        console.log(this.questionList)
       })
   }
 
@@ -177,6 +179,15 @@ export class QuestionComponent implements OnInit {
     return this.progress;
 
   }
+
+  @HostListener('document:visibilitychange',['$event'])
+  newTabOpen()
+  {
+    console.log("New Tab Opened");
+    alert('console.log("New Tab Opened");')
+  }
+
+
 
   @HostListener('window:keydown.esc',['$event'])
   handleKeyDown(event:KeyboardEvent){

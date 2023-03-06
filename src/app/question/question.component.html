@@ -1,5 +1,24 @@
 <app-header1></app-header1>
-<app-header></app-header>
+
+
+
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container-fluid">
+      <a class="navbar-brand text-bold" href="#">
+          <img src="https://www.easyinternships.in/images/logo.png" width="150" alt="logo">
+          <!-- <span class="text-uppercase">Easyinternships</span> -->
+      </a>
+      <!-- <button type="button" class="btn btn-primary"><i class="fa fa-google" aria-hidden="true"></i> Login / Register</button> -->
+
+      <!-- <button type="button" class="btn btn-primary" routerLink="/student-dashboard">Dashboard</button> -->
+
+        <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" ><i class="fa fa-user"></i> Dashboard</button>
+
+
+  </div>
+</nav>
+
+
 
 <div class="container mt-5">
   <div class="card">
@@ -14,7 +33,7 @@
                 <!-- <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button> -->
                 <!-- <button class="btn" (click)="resetQuiz()"><i class="fa fa-refresh text-primary fa-3x" aria-hidden="true"></i></button> -->
                 <!-- <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true"></i></button> -->
-                <button class="btn" (click)="enterFullScreen()">Full Screen</button>
+                <button class="btn" (click)="enterFullScreen()">Enter Full Screen</button>
                 <button class="btn" (click)="closeFullScreen()">Exit Full Screen</button>
                 <input (keydown.esc)="closeFullScreen()" type="hidden">
             </div>
@@ -74,16 +93,6 @@
 
   </div>
 </div>
-<!-- <script>
-  document.addEventListener("visibilitychange", (event) => {
-  if (document.visibilityState == "visible") {
-    console.log("tab is active")
-  } else {
-    alert("In")
-    console.log("tab is inactive")
-  }
-});
-</script> -->
 
 <app-footer1></app-footer1>
 <script>

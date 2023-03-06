@@ -21,7 +21,6 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 import { AuthGuard } from './guards/auth.guard';
 import { Header1Component } from './header1/header1.component';
@@ -33,6 +32,7 @@ import { FormsModule } from '@angular/forms';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { HomeComponent } from './home/home.component';
 
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +51,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -61,6 +62,7 @@ import { HomeComponent } from './home/home.component';
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
+
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [

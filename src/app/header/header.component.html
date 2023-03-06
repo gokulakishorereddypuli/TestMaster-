@@ -1,10 +1,20 @@
+
 <nav class="navbar navbar-dark bg-primary">
   <div class="container-fluid">
       <a class="navbar-brand text-bold" href="#">
           <img src="https://www.easyinternships.in/images/logo.png" width="150" alt="logo">
           <!-- <span class="text-uppercase">Easyinternships</span> -->
       </a>
-      <button type="button" class="btn btn-primary"><i class="fa fa-google" aria-hidden="true"></i> Login / Register</button>
+      <!-- <button type="button" class="btn btn-primary"><i class="fa fa-google" aria-hidden="true"></i> Login / Register</button> -->
+
+      <button type="button" class="btn btn-primary" routerLink="/student-dashboard">Dashboard</button>
+      <!-- <ng-container *ngIf="isloggedin; else newDeb">
+        <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" ><i class="fa fa-user"></i> Dashboard</button>
+     </ng-container>
+     <ng-template #newDeb>
+
+        <button type="button" class="btn btn-primary" (click)="UserLoginRegister()"><i class="fa fa-google" aria-hidden="true"></i> Login / Register</button>
+   </ng-template> -->
   </div>
 </nav>
 

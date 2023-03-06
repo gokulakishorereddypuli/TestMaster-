@@ -8,8 +8,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent {
   public ipAddress:String="";
-  constructor(private loginRegister:AuthService,public http:HttpClient) { }
-
+  public isloggedin:boolean=false;
+  constructor(private loginRegister:AuthService,public http:HttpClient)
+  {
+    console.log(localStorage.getItem('isLoggedIn'))
+    if(localStorage.getItem('isLoggedIn')=='true')
+    {
+      this.isloggedin=true;
+      console.log(localStorage.getItem('isLoggedin'))
+    }
+  }
   ngOnInit(): void {
     this.getIPAddress();
   }

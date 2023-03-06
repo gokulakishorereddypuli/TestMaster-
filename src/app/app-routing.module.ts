@@ -8,8 +8,7 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
 const routes: Routes = [
   //{path:'', redirectTo:'welcome',pathMatch:"full",component:WelcomeComponent},
   {path:'', component:HomeComponent},
-
-  {path:"question", component:QuestionComponent},
+  {path:"quiz", component:QuestionComponent,canActivate:[AuthGuard]},
   {path:"student-dashboard",component:UserdashboardComponent,canActivate:[AuthGuard]}
 
 ];
