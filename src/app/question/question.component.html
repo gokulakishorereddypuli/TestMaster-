@@ -1,7 +1,6 @@
 <app-header1></app-header1>
 
 
-
 <nav class="navbar navbar-dark bg-primary">
   <div class="container-fluid">
       <a class="navbar-brand text-bold" href="#">
@@ -12,7 +11,7 @@
 
       <!-- <button type="button" class="btn btn-primary" routerLink="/student-dashboard">Dashboard</button> -->
 
-        <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" ><i class="fa fa-user"></i> Dashboard</button>
+        <!-- <button class="btn btn-primary btn-lg" disable="true"><h5>{{counter}} sec ⏱</h5></button> -->
 
 
   </div>
@@ -23,26 +22,37 @@
 <div class="container mt-5">
   <div class="card">
       <div class="d-flex justify-content-between p-3">
-          <div class="image">
-              <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="90" alt="logo">
-          </div>
-          <div class="quiz-header">
-              <h4 style="font-family: cursive;">Angular & TypeScript Quiz!</h4>
-              <span style="font-style: italic;">Welcome {{name}}</span>
+            <ng-container *ngIf="spoofDetected">
               <div class="d-flex justify-content-between">
-                <!-- <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button> -->
-                <!-- <button class="btn" (click)="resetQuiz()"><i class="fa fa-refresh text-primary fa-3x" aria-hidden="true"></i></button> -->
-                <!-- <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true"></i></button> -->
-                <button class="btn" (click)="enterFullScreen()">Enter Full Screen</button>
-                <button class="btn" (click)="closeFullScreen()">Exit Full Screen</button>
-                <input (keydown.esc)="closeFullScreen()" type="hidden">
-            </div>
-          </div>
+                <!-- <button class="btn" disabled style="color: red;">Suspicious Activity Detected</button> -->
 
+                <h4 *ngIf="spoofDetected" style="font-family: 'Times New Roman', Times, serif;" style="color: red;">Suspicious Activity Detected</h4>
+
+              </div>
+            </ng-container>
+              <div class="image">
+                  <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="90" alt="logo">
+              </div>
+              <div class="quiz-header">
+                  <h4 style="font-family: cursive;">Angular & TypeScript Quiz!</h4>
+                  <span style="font-style: italic;">Welcome {{name}}</span>
+                              <ng-container *ngIf="!isfullscreen">
+                                  <div class="d-flex justify-content-between">
+                                    <button class="btn" (click)="enterFullScreen()">Enter Full Screen</button>
+                                    <!-- <button class="btn" (click)="closeFullScreen()">Exit Full Screen</button> -->
+
+                                  </div>
+                              </ng-container>
+                              <ng-container *ngIf="isfullscreen && !isQuizStarted">
+                                <div class="d-flex justify-content-between">
+                                  <button class="btn" (click)="startTest()">Start Test</button>
+                                </div>
+                              </ng-container>
+              </div>
       </div>
       <!-- <button class="btn" (click)="enterFullScreen()">Full Screen<button> -->
 
-      <ng-container *ngIf="!isQuizCompleted && isfullscreen">
+      <!-- <ng-container *ngIf="!isQuizCompleted && isfullscreen">
           <div class="d-flex justify-content-around py-3">
               <div class="score">
                   <h5>{{points}} Points</h5>
@@ -72,9 +82,9 @@
               </ol>
           </div>
           <div class="d-flex justify-content-between">
-              <!-- <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button> -->
-              <!-- <button class="btn" (click)="resetQuiz()"><i class="fa fa-refresh text-primary fa-3x" aria-hidden="true"></i></button> -->
-              <!-- <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true"></i></button> -->
+              <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button>
+              <button class="btn" (click)="resetQuiz()"><i class="fa fa-refresh text-primary fa-3x" aria-hidden="true"></i></button>
+              <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true"></i></button>
           </div>
       </ng-container>
 
@@ -89,10 +99,135 @@
                   <p>Your Score : {{points}} Points </p>
               </div>
           </div>
-      </ng-container>
+      </ng-container> -->
 
   </div>
 </div>
+
+
+
+
+
+
+<ng-container *ngIf="isQuizStarted && isfullscreen && !isQuizCompleted && currentQuestion <questionList.length ">
+
+<div class="container mt-5">
+  <div class="card">
+      <!-- <button class="btn" (click)="enterFullScreen()">Full Screen<button> -->
+
+
+          <div class="d-flex justify-content-around py-3">
+              <div class="score">
+                  <h5>{{points}} Points</h5>
+              </div>
+              <div class="question-remain">
+                  <span style="font-style: italic;">Question {{currentQuestion+1}} of {{questionList.length}}</span>
+              </div>
+              <div class="timer">
+                  <h5>{{counter}} sec ⏱</h5>
+              </div>
+          </div>
+          <div class="progress mb-3">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [ngStyle]="{'width':progress+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <!-- <div class="options">
+              <ol *ngFor="let option of questionList[currentQuestion]?.options">
+                  <li disable="clicked" (click)="answer(currentQuestion+1,option,$event) ;clicked=true" >
+                      <div appChangeBg disable="clicked" [isCorrect]="true" class="card">
+                          {{option.text}}
+                      </div>
+                  </li>
+              </ol>
+          </div> -->
+          <!-- <div class="form-check"  *ngFor="let option of questionList[currentQuestion]?.options">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value='{{ option}}' (click)="answer(currentQuestion+1,option)" >
+            <label class="form-check-label" for="exampleRadios1">
+              {{option.text}}
+            </label>
+          </div> -->
+
+          <ng-container *ngIf="!this.clicked ; else newDeb">
+
+
+          <div class="question">
+              <div class="card">
+                  <h3>{{questionList[currentQuestion]?.questionText}}</h3>
+              </div>
+          </div>
+
+
+          <div class="options">
+            <ol *ngFor="let option of questionList[currentQuestion]?.options">
+              <li disable="clicked" (click)="answer(currentQuestion+1,option,$event) ;this.clicked=true" >
+                  <div appChangeBg disable="this.clicked" [isCorrect]="true" class="card">
+                      {{option.text}}
+                  </div>
+              </li>
+          </ol>
+        </div>
+
+
+          <!-- <div class="options" disable="this.clicked">
+            <ol *ngFor="let option of questionList[currentQuestion]?.options">
+                <button type="button" disable="this.clicked" (click)="answer(currentQuestion+1,option,$event);this.clicked=true" class="btn btn-primary">{{option.text}}</button>
+            </ol>
+         </div> -->
+        </ng-container>
+
+
+        <ng-template #newDeb>
+              <div class="options">
+                  <li disable="clicked">
+                      <div style="background-color: greenyellow;" class="card">
+                        Loading Question {{ currentQuestion+2 }}
+                      </div>
+                  </li>
+            </div>
+        </ng-template>
+
+
+
+          <div class="d-flex justify-content-between">
+              <!-- <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button> -->
+              <!-- <button class="btn" (click)="resetQuiz()"><i class="fa fa-refresh text-primary fa-3x" aria-hidden="true"></i></button> -->
+              <!-- <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x" aria-hidden="true"></i></button> -->
+          </div>
+
+
+
+  </div>
+</div>
+
+
+</ng-container>
+
+
+
+<ng-container *ngIf="isQuizCompleted">
+<div class="container mt-5">
+    <div class="card">
+        <div class="row d-flex justify-content-between">
+            <img style="width: 50%;" class="img-fluid col-sm-12 mx-auto" src="https://icon-library.com/images/celebration-icon-png/celebration-icon-png-7.jpg" alt="">
+            <div class="result text-center col-md-6 col-sm-12">
+                <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
+                <p>Total Question : {{questionList.length}} </p>
+                <p>Answered : {{answeredCount}} </p>
+                <p>UnAnswered : {{unansweredCount}} </p>
+
+                <p>Total Correct Answered : {{correctAnswer}} </p>
+                <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
+                <p>Your Score : {{points}} Points </p>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+
+
+
+
+
 
 <app-footer1></app-footer1>
 <script>

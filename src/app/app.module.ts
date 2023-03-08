@@ -33,6 +33,10 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
 import { HomeComponent } from './home/home.component';
 
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { WebcamModule } from 'ngx-webcam';
+import { PreContestVerifierComponent } from './pre-contest-verifier/pre-contest-verifier.component';
+import { CerfiticationComponentComponent } from './cerfitication-component/cerfitication-component.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,14 +48,17 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
      Footer2Component,
      Header2Component,
      UserdashboardComponent,
-     HomeComponent
+     HomeComponent,
+     PreContestVerifierComponent,
+     CerfiticationComponentComponent,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-
+    WebcamModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -63,7 +70,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
 
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     ScreenTrackingService,UserTrackingService,AuthGuard

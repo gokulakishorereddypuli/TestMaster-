@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 //import { Login } from '../interfaces/login';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireModule } from '@angular/fire/compat';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -30,7 +31,7 @@ export class AuthService {
       this.fireAuth.signOut().then(()=>{
         localStorage.removeItem('token');
         localStorage.removeItem('isLoggedIn');
-      }, err=>{
+      }, (_err: any)=>{
         this.route.navigate(['']);
       })
 
@@ -53,7 +54,7 @@ export class AuthService {
             alert("!!! Something went wrong !!!"+exception);
             console.log(exception);
         }
-      },err => {
+      },(err: { message: any; }) => {
         alert(err.message);
       })
     }
@@ -66,7 +67,7 @@ export class AuthService {
         //this.stu_ser=null;
         //this.stu_ser.deleteLogs();
         this.route.navigate(['']);
-      }, err=>{
+      }, (err: { message: any; })=>{
         alert(err.message);
       })
     }

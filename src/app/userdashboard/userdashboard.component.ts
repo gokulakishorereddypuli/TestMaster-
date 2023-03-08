@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { HttpClient } from '@angular/common/http';
+import { QuestionService } from '../service/question.service';
 @Component({
   selector: 'app-userdashboard',
   templateUrl: './userdashboard.component.html',
@@ -19,7 +20,10 @@ export class UserdashboardComponent
   public RegisterForm:any;
   public isQuizCompleted:boolean=false;
   public displayUserDetails:boolean=false;
+  public quizDetails:boolean=false;
   public homeScreen=false;
+
+  public quizList: any = [];
 
   constructor(
     public fb: FormBuilder ,
@@ -27,16 +31,24 @@ export class UserdashboardComponent
     public stu_ser :StudentServiceService,
     private route:Router,
     private db: AngularFireDatabase,
-    private http : HttpClient
+    private http : HttpClient,
+    private question_com :QuestionService
     ){
     //this.stu_ser.OnInit();
-    stu_ser=new StudentServiceService(db,http);
     //this.stu_ser.getStudentDetails();
     this.homeScreen=true;
     this.isQuizCompleted=false;
     this.displayUserDetails=false;
 
     // this.id=localStorage.getItem('token');
+
+
+    // this.questionService.getQuestionJson()
+    // .subscribe(res => {
+    //   this.questionList = res;  //res.questions
+    //   console.log(this.questionList)
+    // })
+
 
   }
   ngOnInit() {
@@ -46,15 +58,29 @@ export class UserdashboardComponent
 
   protected displayUserProfile()
   {
+    this.stu_ser.getUserDetailsFromDB();
     this.displayUserDetails=true;
     this.homeScreen=false;
     this.isQuizCompleted=false;
+    this.quizDetails=false;
   }
   protected displayHomeScreen()
   {
     this.homeScreen=true;
     this.displayUserDetails=false;
     this.isQuizCompleted=false;
+    this.quizDetails=false;
+  }
+  protected displayQuizList()
+  {
+    this.homeScreen=false;
+    this.displayUserDetails=false;
+    this.isQuizCompleted=false;
+    this.quizDetails=true;
+    this.question_com.getQuizList().subscribe((res: any) => {
+      this.quizList = res;  //res.questions
+      console.log(this.quizList)
+    })
   }
   OnSubmit(){
 

@@ -10,7 +10,7 @@
     <div class="navbar-brand text-bold">
       <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayHomeScreen()"><i class="fa fa-home"></i>  </button>
       <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayUserProfile()" ><i class="fa fa-user"></i></button>
-      <button class="btn btn-primary btn-lg" ><i class="fa fa-book"></i></button>
+      <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" (click)="displayQuizList()"><i class="fa fa-book"></i></button>
 
       <button class="btn btn-primary btn-lg" > <i class="fa fa-question"></i></button>
 
@@ -159,6 +159,35 @@
           <td>{{ stu_ser.stuIp }}</td>
           <td><i class="fa fa-check"></i></td>
         </tr>
+        <!-- <tr>
+          <th colspan="3" style="color:red">Note : For any Correction or Updation  Please contact Admin.</th>
+        </tr> -->
+      </tbody>
+
+
+    </table>
+    <p colspan="3" style="color:red">Note : For any Correction or Updation  Please contact Admin.</p>
+  </ng-container>
+
+
+
+
+  <ng-container *ngIf="quizDetails">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" colspan="3" style="color: rgb(53, 82, 247);">Quizes List</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let option of quizList">
+          <th scope="row">{{ option.quizId }}</th>
+          <td>{{ option.quizType}}</td>
+          <td> <a href="/pre-contest-verifier-for-easyinternships.in-certification-for-students?quizId={{option.quizId}}&quizType={{option.quizType}}"><button class="btn btn-primary btn-lg"> Start</button> </a></td>
+        </tr>
+
         <!-- <tr>
           <th colspan="3" style="color:red">Note : For any Correction or Updation  Please contact Admin.</th>
         </tr> -->

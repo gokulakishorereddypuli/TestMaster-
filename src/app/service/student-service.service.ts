@@ -24,22 +24,14 @@ export class StudentServiceService
     this.id=localStorage.getItem('token');
     //this.items = this.db.list('users/'+this.id).valueChanges();
     this.users = this.db.object('users/');
-    this.users.snapshotChanges().subscribe(action => {
-      console.log(action.type);
-      console.log(action.key);
-      console.log(action.payload.val());
-      this.stuEmail=action.payload.val()[this.id]['email'];
-      this.stuIp=action.payload.val()[this.id]['ip'];
-      this.stuName=action.payload.val()[this.id]['name'];
-      this.stuPhoto=action.payload.val()[this.id]['photo'];
-      this.stuId=action.payload.val()[this.id]['uid'];
-    });
+
 
   }
   OnInit()
   {
     this.getIPAddress();
     //this.getUserDetailsFromDB();
+
   }
 
   public getIPAddress()
@@ -48,7 +40,7 @@ export class StudentServiceService
       this.ipAddress = res.ip;
     });
   }
-  private getUserDetailsFromDB()
+  public getUserDetailsFromDB()
   {
     // this.users.snapshotChanges().subscribe(action => {
     //   console.log(action.type);
@@ -60,6 +52,16 @@ export class StudentServiceService
     //   this.stuPhoto=action.payload.val()[this.id]['photo'];
     //   this.stuId=action.payload.val()[this.id]['uid'];
     // });
+    this.users.snapshotChanges().subscribe(action => {
+      //console.log(action.type);
+      //console.log(action.key);
+      //console.log(action.payload.val());
+      this.stuEmail=action.payload.val()[this.id]['email'];
+      this.stuIp=action.payload.val()[this.id]['ip'];
+      this.stuName=action.payload.val()[this.id]['name'];
+      this.stuPhoto=action.payload.val()[this.id]['photo'];
+      this.stuId=action.payload.val()[this.id]['uid'];
+    });
 
 
   }

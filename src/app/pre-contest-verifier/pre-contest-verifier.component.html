@@ -1,0 +1,52 @@
+<app-header1></app-header1>
+
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container-fluid">
+      <a class="navbar-brand text-bold" href="#">
+          <img src="https://www.easyinternships.in/images/logo.png" width="150" alt="logo">
+          <!-- <span class="text-uppercase">Easyinternships</span> -->
+      </a>
+      <!-- <button type="button" class="btn btn-primary"><i class="fa fa-google" aria-hidden="true"></i> Login / Register</button> -->
+
+      <!-- <button type="button" class="btn btn-primary" routerLink="/student-dashboard">Dashboard</button> -->
+
+        <button class="btn btn-primary btn-lg" routerLink="/student-dashboard" ><i class="fa fa-clock-o"></i></button>
+
+
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="card">
+      <div class="d-flex justify-content-between p-3">
+            <ng-container *ngIf="">
+              <div class="d-flex justify-content-between">
+                <!-- <button class="btn" disabled style="color: red;">Suspicious Activity Detected</button> -->
+                <h4 style="font-family: 'Times New Roman', Times, serif;" style="color: red;">Suspicious Activity Detected</h4>
+              </div>
+            </ng-container>
+              <div class="image">
+                  <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="90" alt="logo">
+              </div>
+              <div class="quiz-header">
+                  <h4 style="font-family: cursive;">Angular & TypeScript Quiz!</h4>
+                  <span style="font-style: italic;">Welcome </span>
+                  <div class="d-flex justify-content-between">
+                      <button *ngIf="!is_quiz_eligible"  class="btn" (click)="verifyIdentity()" >Verify Your Identity</button>
+                      <p *ngIf="!is_quiz_eligible" style="color: red;">You ar not eligible</p>
+                      <p *ngIf="is_quiz_eligible" style="color: green;">You are eligible</p>
+                      <button class="btn" (click)="takeTest()"  *ngIf="is_quiz_eligible">Take Test</button>
+                  </div>
+              </div>
+      </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+<app-footer1></app-footer1>
