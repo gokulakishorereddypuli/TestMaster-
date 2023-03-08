@@ -1,5 +1,5 @@
 export const environment = {
-  production:false,
+  production:true,
   firebase: {
     projectId: 'quizapp-707c7',
     appId: '1:107649419376:web:eef23cb1805fbf41968cb5',
